@@ -52,8 +52,8 @@ export default class FetchTrucks extends Component {
 
 
                             <li>
-                                <h3>Make: {truck.make}</h3>
-                                <p>Model: {truck.model}</p>
+
+                                <p>Model: {truck.model_id}</p>
                                 <p>Desire Level: {truck.desire_level}</p>
                                 <p>Affordability: {truck.affordability}</p>
 

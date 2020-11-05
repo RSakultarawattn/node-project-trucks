@@ -7,6 +7,8 @@ import {
   Switch,
 } from 'react-router-dom';
 import FetchTrucks from './TruckPage';
+import ListPage from './ListPage';
+import CreatePage from './CreatePage';
 
 export default class App extends Component {
 
@@ -21,6 +23,16 @@ export default class App extends Component {
 
             <Route
               path="/"
+              exact
+              render={(routerProps) => <ListPage {...routerProps} />}
+            />
+            <Route
+              path="/create"
+              exact
+              render={(routerProps) => <CreatePage {...routerProps} />}
+            />
+            <Route
+              path="/fetch"
               exact
               render={(routerProps) => <FetchTrucks {...routerProps} />}
             />
