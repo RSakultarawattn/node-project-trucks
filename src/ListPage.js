@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import { fetchTrucks } from './fetches';
 
@@ -22,9 +23,11 @@ export default class ListPage extends Component {
                 {
                     trucks.length > 0
                         ? trucks.map(truck => <div>
-                            <p>{truck.model}</p>
-                            <p>{truck.desire_level}</p>
-                            <p>{truck.affordability}</p>
+                            <Link to={`/detail/${truck.id}`} className="updater">Update</Link>
+                            <h2>Model:{truck.model}</h2>
+                            <p>Desire Level:{truck.desire_level}</p>
+                            <p>Is it affordable?:{truck.affordability}</p>
+
                         </div>)
                         : 'loading'
                 }

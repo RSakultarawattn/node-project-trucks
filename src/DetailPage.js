@@ -16,21 +16,25 @@ export default class CreatePage extends Component {
         models: [],
         desireLevel: 0,
         modelId: 1,
+        affordability: true,
     }
 
     componentDidMount = async () => {
         const models = await fetchModels();
         const truck = await fetchTruck(this.props.match.params.id);
         const modelNameAsAString = truck.model;
-
+        
         const matchingModel = models.find((model) => {
+    
             return model.name === modelNameAsAString
+            
         });
 
         this.setState({
             models: models,
             modelId: matchingModel.id,
-            desireLevel: truck.desire_level
+            desireLevel: truck.desire_level,
+            affordability: truck.affordability
         });
 
     }
@@ -38,14 +42,16 @@ export default class CreatePage extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
-
+        Number(this.state.modelId)
         await updateTruck(
             this.props.match.params.id,
             {
 
                 model_id: this.state.modelId,
                 desire_level: this.state.desireLevel,
+                affordability: this.state.affordability,
                 owner_id: userFromLocalStorage.userId
+
 
 
             });
@@ -61,10 +67,12 @@ export default class CreatePage extends Component {
         return (
             <div>
                 <h2>UPDATE a Truck!</h2>
+
                 <form onSubmit={this.handleSubmit}>
                     <label>
-                        Desire desireLevel
-                        {}
+                        Desire Level
+                        
+
                         <input
                             value={this.state.desireLevel}
                             onChange={e => this.setState({ desireLevel: e.target.value })}
@@ -73,7 +81,8 @@ export default class CreatePage extends Component {
 
                     <label>
                         Model
-                        {}
+                        
+
                         <select onChange={this.handleChange}>
                             {
 
@@ -94,6 +103,7 @@ export default class CreatePage extends Component {
                 </form>
 
             </div>
+
         )
     }
 }
