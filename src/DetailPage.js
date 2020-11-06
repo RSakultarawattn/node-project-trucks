@@ -4,6 +4,7 @@ import {
     updateTruck,
     fetchTruck,
     fetchModels,
+    deleteTruck,
 } from './fetches.js';
 
 const userFromLocalStorage = {
@@ -14,8 +15,8 @@ export default class CreatePage extends Component {
 
     state = {
         models: [],
-        desireLevel: 0,
-        modelId: 1,
+        desire_level: 0,
+        model_id: 1,
         affordability: true,
     }
 
@@ -32,8 +33,8 @@ export default class CreatePage extends Component {
 
         this.setState({
             models: models,
-            modelId: matchingModel.id,
-            desireLevel: truck.desire_level,
+            model_id: matchingModel.id,
+            desire_level: truck.desire_level,
             affordability: truck.affordability
         });
 
@@ -42,13 +43,13 @@ export default class CreatePage extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        Number(this.state.modelId)
+        Number(this.state.model_id)
         await updateTruck(
             this.props.match.params.id,
             {
 
-                model_id: this.state.modelId,
-                desire_level: this.state.desireLevel,
+                model_id: this.state.model_id,
+                desire_level: this.state.desire_level,
                 affordability: this.state.affordability,
                 owner_id: userFromLocalStorage.userId
 
@@ -60,8 +61,15 @@ export default class CreatePage extends Component {
     }
 
     handleChange = (e) => {
-        this.setState({ modelId: e.target.value });
+        this.setState({ model_id: e.target.value });
     }
+
+    removeTruck = async () => {
+        await deleteTruck(this.props.match.params.id);
+        this.props.history.push('/');
+    
+      }
+    
 
     render() {
         return (
@@ -74,8 +82,8 @@ export default class CreatePage extends Component {
                         
 
                         <input
-                            value={this.state.desireLevel}
-                            onChange={e => this.setState({ desireLevel: e.target.value })}
+                            value={this.state.desire_level}
+                            onChange={e => this.setState({ desire_level: e.target.value })}
                             type="number" />
                     </label>
 
@@ -88,7 +96,7 @@ export default class CreatePage extends Component {
 
                                 this.state.models.map(model => <option
 
-                                    selected={this.state.modelId === model.id}
+                                    selected={this.state.model_id === model.id}
                                     key={model.id}
                                     value={model.id}>
                                     {model.name}
@@ -101,6 +109,10 @@ export default class CreatePage extends Component {
                     <button>Submit</button>
 
                 </form>
+                <div className="delete-container">
+          <button onClick={this.removeTruck}>Or, remove this truck</button>
+        </div>
+
 
             </div>
 
