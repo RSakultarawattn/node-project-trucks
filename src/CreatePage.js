@@ -13,14 +13,17 @@ export default class CreatePage extends Component {
 
     state = {
 
-       models: []
+        models: [],
+        desire_Level: 0,
+        model_id: 1,
+        affordability: true,
 
     }
 
     componentDidMount = async () => {
         const models = await fetchModels();
         this.setState({ models });
-        
+
     }
 
     handleSubmit = async (e) => {
@@ -50,21 +53,22 @@ export default class CreatePage extends Component {
                     <label>
                         Desire Level
                         
+
                         <input onChange={e => this.setState({ desireLevel: e.target.value })} type="number" />
-                        
+
                     </label>
-                    
+
 
                     <label>
                         Model
                         <select onChange={this.handleChange}>
                             {
-                                this.state.models.length > 0 
-                                ? this.state.models.map(model => 
-                                <option key={model.id} value={model.id} >{model.name}</option>
-                                )
-                                : 'loading'
-                                    }   
+                                this.state.models.length > 0
+                                    ? this.state.models.map(model =>
+                                        <option key={model.id} value={model.id} >{model.name}</option>
+                                    )
+                                    : 'loading'
+                            }
                         </select>
 
                     </label>
