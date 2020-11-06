@@ -24,6 +24,7 @@ export default class ListPage extends Component {
                         ? trucks.map(truck => <div>
                             <p>{truck.model}</p>
                             <p>{truck.desire_level}</p>
+                            <p>{truck.affordability}</p>
                         </div>)
                         : 'loading'
                 }
