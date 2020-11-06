@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import request from 'superagent';
+
 import './App.css';
 import { createTruck, fetchModels } from './fetches';
 
