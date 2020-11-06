@@ -11,7 +11,6 @@ import ListPage from './ListPage';
 import CreatePage from './CreatePage';
 import DetailPage from './DetailPage';
 import { Link } from 'react-router-dom';
-//import TruckPage from './TruckPage';
 
 export default class App extends Component {
 
@@ -23,7 +22,7 @@ export default class App extends Component {
 
         <Router>
 
-          <Link to="/">Home</Link>
+          <Link to="/" className="home">Home</Link>
 
 
           <Switch>
@@ -47,11 +46,6 @@ export default class App extends Component {
               exact
               render={(routerProps) => <DetailPage {...routerProps} />}
             />
-            {/* <Route
-              path="/trucks"
-              exact
-              render={(routerProps) => <TruckPage {...routerProps} />}
-            /> */}
 
 
           </Switch>
