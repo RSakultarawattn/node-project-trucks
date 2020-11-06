@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import request from 'superagent';
+import './App.css';
+import { createTruck, fetchModels } from './fetches';
 
 
 const userFromLocalStorage = {
@@ -11,31 +13,27 @@ export default class CreatePage extends Component {
 
     state = {
 
-        models: []
+       models: []
 
     }
 
     componentDidMount = async () => {
-        const response = await request.get('https://intense-dusk-47624.herokuapp.com/models');
-
-        this.setState({ models: response.body });
-        console.log(response.body)
+        const models = await fetchModels();
+        this.setState({ models });
+        
     }
 
     handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newTruck = {
+        await createTruck({
+
+            name: this.state.id,
             model_id: this.state.modelId,
             desire_level: this.state.desireLevel,
             affordability: this.state.affordability,
             owner_id: userFromLocalStorage.userId
-        };
-
-        await request
-            .post('https://intense-dusk-47624.herokuapp.com/trucks')
-            .send(newTruck);
-
+        });
 
         this.props.history.push('/');
     }
@@ -47,8 +45,7 @@ export default class CreatePage extends Component {
     render() {
         console.log(this.state.models)
         return (
-            <div>
-                Create a truck
+            <div>              <h2 className="choices">Create a truck</h2>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Desire Level
@@ -56,21 +53,16 @@ export default class CreatePage extends Component {
                         <input onChange={e => this.setState({ desireLevel: e.target.value })} type="number" />
                         
                     </label>
-                    <label>
-                        Affordability
-                        
-                        <input onChange={e => this.setState({ affordability: e.target.value })} />
-                        
-                    </label>
+                    
 
                     <label>
                         Model
                         <select onChange={this.handleChange}>
                             {
                                 this.state.models.length > 0 
-                                ? this.state.models.map(model => <option key={model.id} value={model.id} >
-                                    {model.name}
-                                </option>)
+                                ? this.state.models.map(model => 
+                                <option key={model.id} value={model.id} >{model.name}</option>
+                                )
                                 : 'loading'
                                     }   
                         </select>

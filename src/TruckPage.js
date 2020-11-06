@@ -1,6 +1,6 @@
 
-import React, { Component } from 'react';
-import fetch from 'superagent';
+// import React, { Component } from 'react';
+// import fetch from 'superagent';
 
 
 
@@ -8,61 +8,61 @@ import fetch from 'superagent';
 
 
 
-export default class FetchTrucks extends Component {
+// export default class FetchTrucks extends Component {
 
-    state = {
+//     state = {
 
-        truckResults: [],
+//         truckResults: [],
 
-    }
+//     }
 
-    componentDidMount = async () => {
-        await this.FetchTrucks();
-    }
+//     componentDidMount = async () => {
+//         await this.FetchTrucks();
+//     }
 
-    handleSubmit = async (e) => {
-        e.preventDefault();
+//     handleSubmit = async (e) => {
+//         e.preventDefault();
 
-        await this.FetchTrucks();
-    }
+//         await this.FetchTrucks();
+//     }
 
-    handleChange = (e) => {
-        this.setState({ searchInput: e.target.value });
+//     handleChange = (e) => {
+//         this.setState({ searchInput: e.target.value });
 
-    }
+//     }
 
-    FetchTrucks = async () => {
-        const response = await fetch.get(`https://intense-dusk-47624.herokuapp.com/trucks`);
-
-
-        this.setState({ truckResults: response.body });
-    }
-
-    render() {
-        console.log(this.state.truckResults)
-        return (
-
-            <div className="fetch">
-
-                {
-                    this.state.loading
-                        ? 'loading!!!'
-
-                        : this.state.truckResults.map(truck =>
+//     FetchTrucks = async () => {
+//         const response = await fetch.get(`https://intense-dusk-47624.herokuapp.com/trucks`);
 
 
-                            <li>
+//         this.setState({ truckResults: response.body });
+//     }
 
-                                <p>Model: {truck.model_id}</p>
-                                <p>Desire Level: {truck.desire_level}</p>
-                                <p>Affordability: {truck.affordability}</p>
+//     render() {
+//         console.log(this.state.truckResults)
+//         return (
 
-                            </li>)
+//             <div className="fetch">
+
+//                 {
+//                     this.state.loading
+//                         ? 'loading!!!'
+
+//                         : this.state.truckResults.map(truck =>
 
 
-                }
-            </div>
+//                             <li>
 
-        )
-    }
-}
+//                                 <p>Model: {truck.model_id}</p>
+//                                 <p>Desire Level: {truck.desire_level}</p>
+//                                 <p>Affordability: {truck.affordability}</p>
+
+//                             </li>)
+
+
+//                 }
+//             </div>
+
+//         )
+//     }
+// }

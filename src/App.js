@@ -6,9 +6,11 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import FetchTrucks from './TruckPage';
+
 import ListPage from './ListPage';
 import CreatePage from './CreatePage';
+import DetailPage from './DetailPage';
+import { Link } from 'react-router-dom';
 
 export default class App extends Component {
 
@@ -20,27 +22,32 @@ export default class App extends Component {
 
         <Router>
           <Switch>
-
+            <Link to='/detail/:id'> Update a truck!
             <Route
-              path="/"
-              exact
-              render={(routerProps) => <ListPage {...routerProps} />}
-            />
+                path="/"
+                exact
+                render={(routerProps) => <ListPage {...routerProps} />}
+
+              />
+            </Link>
             <Route
               path="/create"
               exact
               render={(routerProps) => <CreatePage {...routerProps} />}
             />
+
+
             <Route
-              path="/fetch"
+              path="/detail/:id"
               exact
-              render={(routerProps) => <FetchTrucks {...routerProps} />}
+              render={(routerProps) => <DetailPage {...routerProps} />}
             />
+
           </Switch>
         </Router>
 
 
-      </div>
+      </div >
     )
   }
 }
