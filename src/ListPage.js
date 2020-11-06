@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import request from 'superagent';
+
+import { fetchTrucks } from './fetches';
 
 export default class ListPage extends Component {
 
@@ -9,17 +10,18 @@ export default class ListPage extends Component {
     }
 
     componentDidMount = async () => {
-        const response = await request.get('https://intense-dusk-47624.herokuapp.com/trucks');
+        const trucks = await fetchTrucks();
 
-        this.setState({ trucks: response.body });
+        this.setState({ trucks });
     }
     render() {
+        const { trucks } = this.state;
 
         return (
             <div>
                 {
-                    this.state.trucks.length > 0
-                        ? this.state.trucks.map(truck => <div>
+                    trucks.length > 0
+                        ? trucks.map(truck => <div>
                             <p>{truck.model}</p>
                             <p>{truck.desire_level}</p>
                         </div>)

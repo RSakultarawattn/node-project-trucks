@@ -1,5 +1,15 @@
 .App {
   text-align: center;
+  background-image: url("/src/oldtruck.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-color: blue;
+  height: 1500px;
+  font-size: 2.5em;
+  color: rgb(22, 223, 139);
+  font-family: fantasy;
+  font-stretch: expanded;
+  text-shadow: blue 3px 3px;
 }
 
 .App-logo {
@@ -36,12 +46,29 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.choices {
+
+  font-size: 2em;
+  font-family: cursive;
+  font-weight: bold;
+  color: red;
+  text-shadow: black 2px 2px;
+}
+
+form {
+
+  font-size: .8em;
+}
+
 .fetch {
 
-  background-color: red;
-  color: yellow;
-  font-size: 2em;
-  text-shadow: black 3px 3px;
+  
+  color: red;
+  font-size: 1em;
+  text-shadow: yellow 1px 1px;
   font-family: 'Times New Roman', Times, serif;
 
 }
